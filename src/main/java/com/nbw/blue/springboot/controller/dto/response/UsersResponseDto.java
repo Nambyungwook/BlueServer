@@ -1,4 +1,4 @@
-package com.nbw.blue.springboot.controller.dto;
+package com.nbw.blue.springboot.controller.dto.response;
 
 import com.nbw.blue.springboot.domain.users.Users;
 import lombok.Getter;
@@ -7,6 +7,7 @@ import lombok.Getter;
 public class UsersResponseDto {
 
     private Long id;
+    private String uid;
     private String email;
     private String pwd;
     private String name;
@@ -23,6 +24,7 @@ public class UsersResponseDto {
 
     public UsersResponseDto(Users entity) {
         this.id = entity.getId();
+        this.uid = entity.getUid();
         this.email = entity.getEmail();
         this.pwd = entity.getPwd();
         this.name = entity.getName();

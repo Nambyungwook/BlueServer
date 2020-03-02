@@ -16,6 +16,9 @@ public class Users extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "uid", columnDefinition = "varchar(10)", nullable = false)
+    private String uid;
+
     @Column(name = "email", columnDefinition = "varchar(30)", nullable = false)
     private String email;
 
@@ -56,7 +59,8 @@ public class Users extends BaseTimeEntity {
     private Long appdoc_index;
 
     @Builder
-    public Users(String email,
+    public Users(String uid,
+                 String email,
                  String pwd,
                  String name,
                  String birthday,
@@ -69,6 +73,7 @@ public class Users extends BaseTimeEntity {
                  String signType,
                  String signToken,
                  Long appdoc_index) {
+        this.uid = uid;
         this.email = email;
         this.pwd = pwd;
         this.name = name;

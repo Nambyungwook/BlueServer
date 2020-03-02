@@ -29,6 +29,7 @@ dependencies {
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('com.h2database:h2')
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     annotationProcessor('org.projectlombok:lombok')

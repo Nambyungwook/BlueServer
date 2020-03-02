@@ -1,4 +1,4 @@
-package com.nbw.blue.springboot.controller.dto;
+package com.nbw.blue.springboot.controller.dto.request;
 
 import lombok.Builder;
 import lombok.Getter;

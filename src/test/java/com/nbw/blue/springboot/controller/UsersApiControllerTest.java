@@ -1,7 +1,7 @@
 package com.nbw.blue.springboot.controller;
 
-import com.nbw.blue.springboot.controller.dto.UsersSaveRequestDto;
-import com.nbw.blue.springboot.controller.dto.UsersUpdateRequestDto;
+import com.nbw.blue.springboot.controller.dto.request.UsersSaveRequestDto;
+import com.nbw.blue.springboot.controller.dto.request.UsersUpdateRequestDto;
 import com.nbw.blue.springboot.domain.users.Users;
 import com.nbw.blue.springboot.domain.users.UsersRepository;
 import org.junit.After;

@@ -1,6 +1,7 @@
-package com.nbw.blue.springboot.controller.dto;
+package com.nbw.blue.springboot.controller.dto.request;
 
 import com.nbw.blue.springboot.domain.users.Users;
+import com.nbw.blue.springboot.utils.UidGenerator;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class UsersSaveRequestDto {
+    private String uid;
     private String email;
     private String pwd;
     private String name;
@@ -23,7 +25,8 @@ public class UsersSaveRequestDto {
     private Long appdoc_index;
 
     @Builder
-    public UsersSaveRequestDto(String email,
+    public UsersSaveRequestDto(String uid,
+                               String email,
                                String pwd,
                                String name,
                                String birthday,
@@ -36,6 +39,7 @@ public class UsersSaveRequestDto {
                                String signType,
                                String signToken,
                                Long appdoc_index) {
+        this.uid = uid;
         this.email = email;
         this.pwd = pwd;
         this.name = name;
@@ -53,6 +57,7 @@ public class UsersSaveRequestDto {
 
     public Users toEntity() {
         return Users.builder()
+                .uid(UidGenerator.make())
                 .email(email)
                 .pwd(pwd)
                 .name(name)
