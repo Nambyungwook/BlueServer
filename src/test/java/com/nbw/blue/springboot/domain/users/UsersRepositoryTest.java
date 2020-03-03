@@ -38,7 +38,6 @@ public class UsersRepositoryTest {
         Integer income = 4000;//만원
         String phone = "010-6267-6837";
         String signType = "M";
-        String signToken = "";
         Long appdoc_index = Long.valueOf(1);
 
         usersRepository.save(Users.builder()
@@ -53,7 +52,6 @@ public class UsersRepositoryTest {
             .income(income)
             .phone(phone)
             .signType(signType)
-            .signToken(signToken)
             .appdoc_index(appdoc_index)
             .build());
 
@@ -80,7 +78,6 @@ public class UsersRepositoryTest {
         Integer income = 4000;//만원
         String phone = "010-6267-6837";
         String signType = "M";
-        String signToken = "";
         Long appdoc_index = Long.valueOf(1);
 
         LocalDateTime now = LocalDateTime.of(2020,3,1,0,0,0);
@@ -96,7 +93,6 @@ public class UsersRepositoryTest {
                 .income(income)
                 .phone(phone)
                 .signType(signType)
-                .signToken(signToken)
                 .appdoc_index(appdoc_index)
                 .build());
 

@@ -21,7 +21,6 @@ public class UsersSaveRequestDto {
     private Integer income;
     private String phone;
     private String signType;
-    private String signToken;
     private Long appdoc_index;
 
     @Builder
@@ -37,7 +36,6 @@ public class UsersSaveRequestDto {
                                Integer income,
                                String phone,
                                String signType,
-                               String signToken,
                                Long appdoc_index) {
         this.uid = uid;
         this.email = email;
@@ -51,7 +49,6 @@ public class UsersSaveRequestDto {
         this.income = income;
         this.phone = phone;
         this.signType = signType;
-        this.signToken = signToken;
         this.appdoc_index = appdoc_index;
     }
 
@@ -69,7 +66,6 @@ public class UsersSaveRequestDto {
                 .income(income)
                 .phone(phone)
                 .signType(signType)
-                .signToken(signToken)
                 .appdoc_index(appdoc_index)
                 .build();
     }

@@ -10,6 +10,10 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"uid"}),
+        @UniqueConstraint(columnNames = {"email"}),
+})
 public class Users extends BaseTimeEntity {
 
     @Id
@@ -52,9 +56,6 @@ public class Users extends BaseTimeEntity {
     @Column(name = "sign_type")
     private String signType;
 
-    @Column(name = "sign_token")
-    private String signToken;
-
     @Column(name = "appdoc_index")
     private Long appdoc_index;
 
@@ -71,7 +72,6 @@ public class Users extends BaseTimeEntity {
                  Integer income,
                  String phone,
                  String signType,
-                 String signToken,
                  Long appdoc_index) {
         this.uid = uid;
         this.email = email;
@@ -85,7 +85,6 @@ public class Users extends BaseTimeEntity {
         this.income = income;
         this.phone = phone;
         this.signType = signType;
-        this.signToken = signToken;
         this.appdoc_index = appdoc_index;
     }
 

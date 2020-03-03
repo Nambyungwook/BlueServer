@@ -17,8 +17,8 @@ public enum ResponseCode {
 
 
     INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "비밀번호가 일치하지 않습니다."),
-    INVALID_AUTH_TOKEN(HttpStatus.BAD_REQUEST, "인증토큰이 유호하지 않습니다."),
-    NEED_TO_AUTH_TOKEN(HttpStatus.BAD_REQUEST, "인증토큰이 필요합니다."),
+    INVALID_SIGN_TOKEN(HttpStatus.BAD_REQUEST, "인증토큰이 유호하지 않습니다."),
+    NEED_TO_SIGN_TOKEN(HttpStatus.BAD_REQUEST, "인증토큰이 필요합니다."),
 
     NOT_EXIST_USER_INFO(HttpStatus.BAD_REQUEST, "회원 정보가 없습니다."),
     NOT_EXIST_PHONE(HttpStatus.BAD_REQUEST, "전화번호가 없습니다."),

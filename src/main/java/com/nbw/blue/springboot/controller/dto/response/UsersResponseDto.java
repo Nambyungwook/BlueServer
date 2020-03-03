@@ -1,6 +1,7 @@
 package com.nbw.blue.springboot.controller.dto.response;
 
 import com.nbw.blue.springboot.domain.users.Users;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -19,9 +20,9 @@ public class UsersResponseDto {
     private Integer income;
     private String phone;
     private String signType;
-    private String signToken;
     private Long appdoc_index;
 
+    @Builder
     public UsersResponseDto(Users entity) {
         this.id = entity.getId();
         this.uid = entity.getUid();
@@ -36,7 +37,6 @@ public class UsersResponseDto {
         this.income = entity.getIncome();
         this.phone = entity.getPhone();
         this.signType = entity.getSignType();
-        this.signToken = entity.getSignToken();
         this.appdoc_index = entity.getAppdoc_index();
     }
 }

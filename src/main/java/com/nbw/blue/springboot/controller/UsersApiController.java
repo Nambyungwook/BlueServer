@@ -1,5 +1,6 @@
 package com.nbw.blue.springboot.controller;
 
+import com.nbw.blue.springboot.controller.dto.request.UsersSigninRequestDto;
 import com.nbw.blue.springboot.controller.dto.response.UsersResponseDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersUpdateRequestDto;
@@ -37,5 +38,12 @@ public class UsersApiController {
         usersService.delete(id);
 
         return id;
+    }
+
+    //로그인시 회원정보가 올바르면 true반환
+    @PostMapping("/blue/v1/users/signin")
+    public boolean signin(@RequestBody UsersSigninRequestDto requestDto) {
+
+        return usersService.signin(requestDto);
     }
 }
