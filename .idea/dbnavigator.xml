@@ -23,11 +23,7 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
-        <schema name="blue_app_server" object-types="table, procedure, function, view" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
@@ -102,7 +98,9 @@ CREATE TABLE SPRING_SESSION_ATTRIBUTES (
 	ATTRIBUTE_BYTES BLOB NOT NULL,
 	CONSTRAINT SPRING_SESSION_ATTRIBUTES_PK PRIMARY KEY (SESSION_PRIMARY_ID, ATTRIBUTE_NAME),
 	CONSTRAINT SPRING_SESSION_ATTRIBUTES_FK FOREIGN KEY (SESSION_PRIMARY_ID) REFERENCES SPRING_SESSION(PRIMARY_ID) ON DELETE CASCADE
-) ENGINE=InnoDB ROW_FORMAT=DYNAMIC;]]></console>
+) ENGINE=InnoDB ROW_FORMAT=DYNAMIC;
+
+select * from users;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

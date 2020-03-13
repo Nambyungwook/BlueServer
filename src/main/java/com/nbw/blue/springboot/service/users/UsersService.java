@@ -2,6 +2,7 @@ package com.nbw.blue.springboot.service.users;
 
 import com.nbw.blue.springboot.controller.dto.request.UsersSigninRequestDto;
 import com.nbw.blue.springboot.controller.dto.response.CommonResponeseDto;
+import com.nbw.blue.springboot.controller.dto.response.SignStatusResponseDto;
 import com.nbw.blue.springboot.controller.dto.response.UsersResponseDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersUpdateRequestDto;
@@ -92,6 +93,19 @@ public class UsersService {
 
         CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "회원탈퇴 성공");
         return responeseDto;
+    }
+
+    @Transactional
+    public SignStatusResponseDto getStatus(String uid) {
+        SignStatus signStatus = signStatusRepository.findByUid(uid).orElse(SignStatus.builder().uid(uid).sign_status(false).build());
+
+        if (signStatus.isSign_status()) {
+            SignStatusResponseDto signStatusResponseDto = new SignStatusResponseDto(uid, true);
+            return signStatusResponseDto;
+        } else {
+            SignStatusResponseDto signStatusResponseDto = new SignStatusResponseDto(uid, false);
+            return signStatusResponseDto;
+        }
     }
 
 

@@ -2,9 +2,11 @@ package com.nbw.blue.springboot.controller;
 
 import com.nbw.blue.springboot.controller.dto.request.UsersSigninRequestDto;
 import com.nbw.blue.springboot.controller.dto.response.CommonResponeseDto;
+import com.nbw.blue.springboot.controller.dto.response.SignStatusResponseDto;
 import com.nbw.blue.springboot.controller.dto.response.UsersResponseDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersUpdateRequestDto;
+import com.nbw.blue.springboot.domain.signstatus.SignStatus;
 import com.nbw.blue.springboot.service.users.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -48,14 +50,22 @@ public class UsersApiController {
         return usersService.signin(requestDto);
     }
 
+    //로그아웃
     @GetMapping("/blue/v1/users/signout/{uid}")
     public CommonResponeseDto signout(@PathVariable String uid) {
         return usersService.signout(uid);
     }
 
+    //회원탈퇴
     @GetMapping("/blue/v1/users/dropout/{uid}")
     public CommonResponeseDto dropout(@PathVariable String uid) {
 
         return usersService.dropUser(uid);
+    }
+
+    //로그인상태 조회
+    @GetMapping("/blue/v1/users/status/{uid}")
+    public SignStatusResponseDto getStatus(@PathVariable String uid) {
+        return usersService.getStatus(uid);
     }
 }
