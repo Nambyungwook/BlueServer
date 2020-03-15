@@ -18,24 +18,24 @@ public class UsersApiController {
     private final UsersService usersService;
 
     //회원가입
-    @PostMapping("/blue/v1/users")
-    public Long save(@RequestBody UsersSaveRequestDto requestDto) {
+    @PostMapping("/blue/v1/users/signup")
+    public UsersResponseDto save(@RequestBody UsersSaveRequestDto requestDto) {
         return usersService.save(requestDto);
     }
 
     //회원정보수정
-    @PutMapping("/blue/v1/users/{id}")
-    public Long update(@PathVariable Long id, @RequestBody UsersUpdateRequestDto requestDto) {
-        return usersService.update(id, requestDto);
+    @PutMapping("/blue/v1/users/update/{uid}")
+    public UsersResponseDto update(@PathVariable String uid, @RequestBody UsersUpdateRequestDto requestDto) {
+        return usersService.update(uid, requestDto);
     }
 
     //회원정보조회
-    @GetMapping("/blue/v1/users/{id}")
-    public UsersResponseDto findById(@PathVariable Long id) {
-        return usersService.findById(id);
+    @GetMapping("/blue/v1/users/userinfo/{uid}")
+    public UsersResponseDto findByUid(@PathVariable String uid) {
+        return usersService.findByUid(uid);
     }
 
-    //회원정보삭제
+    //회원정보삭제 - index로 삭제
     @DeleteMapping("/blue/v1/users/{id}")
     public Long delete(@PathVariable Long id) {
         usersService.delete(id);

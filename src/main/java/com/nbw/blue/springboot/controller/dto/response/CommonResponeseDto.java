@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Builder
 public class CommonResponeseDto {
 
-    private String responese_code;
+    private String response_code;
     private String message;
+    private String uid;
 
     @Builder
-    public CommonResponeseDto(String responese_code, String message) {
-        this.responese_code = responese_code;
+    public CommonResponeseDto(String response_code, String message, String uid) {
+        this.response_code = response_code;
         this.message = message;
+        this.uid = uid;
     }
 }

@@ -31,7 +31,8 @@ public class SignStatus extends BaseTimeEntity {
         this.sign_status = sign_status;
     }
 
-    public void update(boolean sign_status) {
+    public void update(String uid, boolean sign_status) {
+        this.uid = uid;
         this.sign_status = sign_status;
     }
 }

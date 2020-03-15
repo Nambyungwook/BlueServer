@@ -24,13 +24,13 @@ public class UsersService {
     private final SignStatusRepository signStatusRepository;
 
     @Transactional
-    public Long save(UsersSaveRequestDto requestDto) {
-        return usersRepository.save(requestDto.toEntity()).getId();
+    public UsersResponseDto save(UsersSaveRequestDto requestDto) {
+        return new UsersResponseDto(usersRepository.save(requestDto.toEntity()));
     }
 
     @Transactional
-    public Long update(Long id, UsersUpdateRequestDto requestDto) {
-        Users users = usersRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
+    public UsersResponseDto update(String uid, UsersUpdateRequestDto requestDto) {
+        Users users = usersRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
         users.update(requestDto.getName(),
                      requestDto.getBirthday(),
                      requestDto.getGender(),
@@ -41,7 +41,7 @@ public class UsersService {
                      requestDto.getPhone(),
                      requestDto.getAppdoc_index());
 
-        return id;
+        return new UsersResponseDto(users);
     }
 
     @Transactional
@@ -59,12 +59,12 @@ public class UsersService {
         SignStatus signStatus = signStatusRepository.findByUid(tmp_uid).orElse(SignStatus.builder().uid(tmp_uid).sign_status(false).build());
 
         if (users.getPwd().equals(requestDto.getPwd())) {
-            signStatusRepository.delete(signStatus);
-            signStatusRepository.save(signStatus.builder().uid(tmp_uid).sign_status(true).build());
-            CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "로그인 성공");
+            signStatus.update(tmp_uid, true);
+            CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "로그인 성공", users.getUid());
             return responeseDto;
         } else {
-            CommonResponeseDto responeseDto = new CommonResponeseDto("FAIL", "로그인 실패");
+            signStatus.update(tmp_uid, false);
+            CommonResponeseDto responeseDto = new CommonResponeseDto("FAIL", "로그인 실패", users.getUid());
             return responeseDto;
         }
     }
@@ -75,12 +75,12 @@ public class UsersService {
         SignStatus signStatus = signStatusRepository.findByUid(uid).orElse(SignStatus.builder().uid(uid).sign_status(true).build());
 
         if (signStatus.isSign_status()) {
-            signStatus.update(false);
+            signStatus.update(uid, false);
 
-            CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "로그아웃 성공");
+            CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "로그아웃 성공", uid);
             return responeseDto;
         } else {
-            CommonResponeseDto responeseDto = new CommonResponeseDto("FAIL", "로그아웃 실패");
+            CommonResponeseDto responeseDto = new CommonResponeseDto("FAIL", "로그아웃 실패", uid);
             return responeseDto;
         }
     }
@@ -91,13 +91,13 @@ public class UsersService {
 
         usersRepository.delete(users);
 
-        CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "회원탈퇴 성공");
+        CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "회원탈퇴 성공", uid);
         return responeseDto;
     }
 
     @Transactional
     public SignStatusResponseDto getStatus(String uid) {
-        SignStatus signStatus = signStatusRepository.findByUid(uid).orElse(SignStatus.builder().uid(uid).sign_status(false).build());
+        SignStatus signStatus = signStatusRepository.findByUid(uid).orElse(SignStatus.builder().uid(uid).sign_status(true).build());
 
         if (signStatus.isSign_status()) {
             SignStatusResponseDto signStatusResponseDto = new SignStatusResponseDto(uid, true);
@@ -109,8 +109,8 @@ public class UsersService {
     }
 
 
-    public UsersResponseDto findById(Long id) {
-        Users entity = usersRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
+    public UsersResponseDto findByUid(String uid) {
+        Users entity = usersRepository.findByUid(uid).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
 
         return new UsersResponseDto(entity);
     }
