@@ -23,7 +23,12 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
+        <schema name="blue_app_server" object-types="table, dataset trigger, view, function, constraint, column, index, procedure" />
+        <schema name="mysql" object-types="table, view, function, procedure" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
@@ -100,7 +105,11 @@ CREATE TABLE SPRING_SESSION_ATTRIBUTES (
 	CONSTRAINT SPRING_SESSION_ATTRIBUTES_FK FOREIGN KEY (SESSION_PRIMARY_ID) REFERENCES SPRING_SESSION(PRIMARY_ID) ON DELETE CASCADE
 ) ENGINE=InnoDB ROW_FORMAT=DYNAMIC;
 
-select * from users;]]></console>
+select * from users;
+
+select * from sign_status;
+
+select * from test;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -108,6 +117,9 @@ select * from users;]]></console>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="c1399ef2-692b-40b9-9a34-3b19816fa21f" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="c1399ef2-692b-40b9-9a34-3b19816fa21f" dataset="blue_app_server.sign_status" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

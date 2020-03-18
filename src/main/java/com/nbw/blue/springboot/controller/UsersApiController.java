@@ -6,7 +6,6 @@ import com.nbw.blue.springboot.controller.dto.response.SignStatusResponseDto;
 import com.nbw.blue.springboot.controller.dto.response.UsersResponseDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersUpdateRequestDto;
-import com.nbw.blue.springboot.domain.signstatus.SignStatus;
 import com.nbw.blue.springboot.service.users.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
