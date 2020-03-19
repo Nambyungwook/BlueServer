@@ -12,11 +12,8 @@ import com.nbw.blue.springboot.domain.signstatus.SignStatusRepository;
 import com.nbw.blue.springboot.domain.users.Users;
 import com.nbw.blue.springboot.domain.users.UsersRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -116,10 +113,13 @@ public class UsersService {
         }
     }
 
-
     public UsersResponseDto findByUid(String uid) {
         Users entity = usersRepository.findByUid(uid).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
 
         return new UsersResponseDto(entity);
+    }
+
+    public CommonResponeseDto checkServer() {
+        return new CommonResponeseDto("SUCCESS", "SERVER_CONNECT", "000000");
     }
 }

@@ -16,6 +16,12 @@ public class UsersApiController {
 
     private final UsersService usersService;
 
+    //서버확인
+    @GetMapping("/blue/v1/check")
+    public CommonResponeseDto checkServer() {
+        return usersService.checkServer();
+    }
+
     //회원가입
     @PostMapping("/blue/v1/users/signup")
     public UsersResponseDto save(@RequestBody UsersSaveRequestDto requestDto) {
