@@ -119,6 +119,12 @@ public class UsersService {
         return new UsersResponseDto(entity);
     }
 
+    public UsersResponseDto findById(Long id) {
+        Users entity = usersRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
+
+        return new UsersResponseDto(entity);
+    }
+
     public CommonResponeseDto checkServer() {
         return new CommonResponeseDto("SUCCESS", "SERVER_CONNECT", "000000");
     }

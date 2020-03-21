@@ -40,6 +40,12 @@ public class UsersApiController {
         return usersService.findByUid(uid);
     }
 
+    //회원정보조회 - index
+    @GetMapping("/blue/v1/users/{id}")
+    public UsersResponseDto findById(@PathVariable Long id) {
+        return usersService.findById(id);
+    }
+
     //회원정보삭제 - index로 삭제
     @DeleteMapping("/blue/v1/users/{id}")
     public Long delete(@PathVariable Long id) {
