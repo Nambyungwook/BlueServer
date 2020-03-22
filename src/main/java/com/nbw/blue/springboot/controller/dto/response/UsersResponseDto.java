@@ -21,6 +21,7 @@ public class UsersResponseDto {
     private String phone;
     private String signType;
     private Long appdoc_index;
+    private String terms_agree;
 
     @Builder
     public UsersResponseDto(Users entity) {
@@ -38,5 +39,6 @@ public class UsersResponseDto {
         this.phone = entity.getPhone();
         this.signType = entity.getSignType();
         this.appdoc_index = entity.getAppdoc_index();
+        this.terms_agree = entity.getTerms_agree();
     }
 }

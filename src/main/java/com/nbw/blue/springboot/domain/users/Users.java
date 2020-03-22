@@ -59,6 +59,9 @@ public class Users extends BaseTimeEntity {
     @Column(name = "appdoc_index")
     private Long appdoc_index;
 
+    @Column(name = "terms_agree")
+    private String terms_agree;
+
     @Builder
     public Users(String uid,
                  String email,
@@ -72,7 +75,8 @@ public class Users extends BaseTimeEntity {
                  Integer income,
                  String phone,
                  String signType,
-                 Long appdoc_index) {
+                 Long appdoc_index,
+                 String terms_agree) {
         this.uid = uid;
         this.email = email;
         this.pwd = pwd;
@@ -86,6 +90,7 @@ public class Users extends BaseTimeEntity {
         this.phone = phone;
         this.signType = signType;
         this.appdoc_index = appdoc_index;
+        this.terms_agree = terms_agree;
     }
 
     public void update(String name,

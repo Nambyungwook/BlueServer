@@ -22,6 +22,7 @@ public class UsersSaveRequestDto {
     private String phone;
     private String signType;
     private Long appdoc_index;
+    private String terms_agree;
 
     @Builder
     public UsersSaveRequestDto(String uid,
@@ -36,7 +37,8 @@ public class UsersSaveRequestDto {
                                Integer income,
                                String phone,
                                String signType,
-                               Long appdoc_index) {
+                               Long appdoc_index,
+                               String terms_agree) {
         this.uid = uid;
         this.email = email;
         this.pwd = pwd;
@@ -50,6 +52,7 @@ public class UsersSaveRequestDto {
         this.phone = phone;
         this.signType = signType;
         this.appdoc_index = appdoc_index;
+        this.terms_agree = terms_agree;
     }
 
     public Users toEntity() {
@@ -67,6 +70,7 @@ public class UsersSaveRequestDto {
                 .phone(phone)
                 .signType(signType)
                 .appdoc_index(appdoc_index)
+                .terms_agree(terms_agree)
                 .build();
     }
 }
