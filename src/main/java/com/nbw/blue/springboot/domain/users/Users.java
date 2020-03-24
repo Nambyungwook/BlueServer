@@ -26,7 +26,7 @@ public class Users extends BaseTimeEntity {
     @Column(name = "email", columnDefinition = "varchar(30)", nullable = false)
     private String email;
 
-    @Column(name = "pwd", columnDefinition = "varchar(15)", nullable = false)
+    @Column(name = "pwd", columnDefinition = "varchar(255)", nullable = false)
     private String pwd;
 
     @Column(name = "name")
