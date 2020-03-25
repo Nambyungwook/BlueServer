@@ -2,9 +2,12 @@ package com.nbw.blue.springboot.service.sites;
 
 import com.nbw.blue.springboot.controller.dto.request.SitesSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.SitesUpdateRequestDto;
+import com.nbw.blue.springboot.controller.dto.request.UserSavedSitesSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.response.SitesResponseDto;
+import com.nbw.blue.springboot.controller.dto.response.UserSavedSitesResponseDto;
 import com.nbw.blue.springboot.domain.sites.Sites;
 import com.nbw.blue.springboot.domain.sites.SitesRepository;
+import com.nbw.blue.springboot.domain.sites.UserSavedSitesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

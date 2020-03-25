@@ -1,8 +1,10 @@
 package com.nbw.blue.springboot.controller;
 
+import com.nbw.blue.springboot.controller.dto.request.UserSavedSitesSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersSigninRequestDto;
 import com.nbw.blue.springboot.controller.dto.response.CommonResponeseDto;
 import com.nbw.blue.springboot.controller.dto.response.SignStatusResponseDto;
+import com.nbw.blue.springboot.controller.dto.response.UserSavedSitesResponseDto;
 import com.nbw.blue.springboot.controller.dto.response.UsersResponseDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersUpdateRequestDto;
@@ -78,5 +80,19 @@ public class UsersApiController {
     @GetMapping("/blue/v1/users/status/{uid}")
     public SignStatusResponseDto getStatus(@PathVariable String uid) {
         return usersService.getStatus(uid);
+    }
+
+    //사용자가 사이트 저장
+    @PostMapping("/blue/v1/users/save/sites")
+    public UserSavedSitesResponseDto saveSites(@RequestBody UserSavedSitesSaveRequestDto requestDto) {
+
+        return usersService.saveSites(requestDto);
+    }
+
+    //회원탈퇴
+    @GetMapping("/blue/v1/users/delete/site/{uid}/{siteName}")
+    public CommonResponeseDto deleteSites(@PathVariable String uid, @PathVariable String siteName) {
+
+        return usersService.deleteSites(uid, siteName);
     }
 }
