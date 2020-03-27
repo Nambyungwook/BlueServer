@@ -2,13 +2,11 @@ package com.nbw.blue.springboot.controller;
 
 import com.nbw.blue.springboot.controller.dto.request.SitesSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.SitesUpdateRequestDto;
+import com.nbw.blue.springboot.controller.dto.response.SitesListResponseDto;
 import com.nbw.blue.springboot.controller.dto.response.SitesResponseDto;
-import com.nbw.blue.springboot.domain.sites.Sites;
+import com.nbw.blue.springboot.domain.sites.SitesRepository;
 import com.nbw.blue.springboot.service.sites.SitesService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -16,17 +14,28 @@ import org.springframework.web.bind.annotation.*;
 public class SitesApiController {
 
     private final SitesService sitesService;
+    private final SitesRepository sitesRepository;
 
     //전체 목록 조회
     @GetMapping("/blue/v1/sites/")
-    public Page<Sites> getSites(@RequestParam(defaultValue = "1") int page,
-                           @RequestParam(defaultValue = "10") int size) {
+    public SitesListResponseDto getSites(@RequestParam(defaultValue = "0") int page,
+                                         @RequestParam(defaultValue = "10") int size,
+                                         @RequestParam(required = false) String categoryB,
+                                         @RequestParam(required = false) String categoryM,
+                                         @RequestParam(required = false) String categoryS,
+                                         @RequestParam(required = false) String siteName) {
 
-        PageRequest pageable = PageRequest.of(page - 1, size,  Sort.by(Sort.Direction.DESC, "createdDate"));
-
-        Page<Sites> sites = sitesService.findAll(pageable);
-
-        return sites;
+        if (siteName != null) {
+            return new SitesListResponseDto("SUCCESS", sitesRepository.findBySiteName(siteName));
+        } else if (categoryS != null) {
+            return new SitesListResponseDto("SUCCESS", sitesRepository.findByCategoryS(categoryS));
+        } else if (categoryM != null) {
+            return new SitesListResponseDto("SUCCESS", sitesRepository.findByCategoryM(categoryM));
+        } else if (categoryB != null) {
+            return new SitesListResponseDto("SUCCESS", sitesRepository.findByCategoryB(categoryB).subList(page, size));
+        } else {
+            return new SitesListResponseDto("SUCCESS", sitesRepository.findAll( ).subList(page, size));
+        }
     }
 
     //사이트 추가

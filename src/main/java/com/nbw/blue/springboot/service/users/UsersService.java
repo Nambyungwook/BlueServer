@@ -7,7 +7,6 @@ import com.nbw.blue.springboot.controller.dto.response.UserSavedSitesResponseDto
 import com.nbw.blue.springboot.controller.dto.response.UsersResponseDto;
 import com.nbw.blue.springboot.domain.signstatus.SignStatus;
 import com.nbw.blue.springboot.domain.signstatus.SignStatusRepository;
-import com.nbw.blue.springboot.domain.sites.Sites;
 import com.nbw.blue.springboot.domain.sites.UserSavedSites;
 import com.nbw.blue.springboot.domain.sites.UserSavedSitesRepository;
 import com.nbw.blue.springboot.domain.users.Users;
@@ -42,7 +41,7 @@ public class UsersService {
 
         int cnt = 0;
         for (int i=0; i<userSavedSitesList.size(); i++) {
-            if (userSavedSitesList.get(i).getSite_name().equals(siteName)) {
+            if (userSavedSitesList.get(i).getSiteName().equals(siteName)) {
                 userSavedSitesRepository.delete(userSavedSitesList.get(i));
 
                 break;

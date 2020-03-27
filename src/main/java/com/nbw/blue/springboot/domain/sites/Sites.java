@@ -17,45 +17,52 @@ public class Sites extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "site_name", columnDefinition = "varchar(30)", nullable = false)
-    private String site_name;
+    @Column(name = "siteName", columnDefinition = "varchar(30)", nullable = false)
+    private String siteName;
 
-    @Column(name = "category_1", columnDefinition = "varchar(30)", nullable = false)
-    private String category_1;
+    @Column(name = "categoryB", columnDefinition = "varchar(30)", nullable = false)
+    private String categoryB;
 
-    @Column(name = "category_2",columnDefinition = "varchar(30)", nullable = false)
-    private String category_2;
+    @Column(name = "categoryM",columnDefinition = "varchar(30)", nullable = false)
+    private String categoryM;
 
-    @Column(name = "category_3", columnDefinition = "varchar(30)")
-    private String category_3;
+    @Column(name = "categoryS", columnDefinition = "varchar(30)")
+    private String categoryS;
 
-    @Column(name = "site_url", nullable = false)
-    private String site_url;
+    @Column(name = "siteUrl", nullable = false)
+    private String siteUrl;
+
+    @Column(name = "siteDetail", nullable = false)
+    private String siteDetail;
 
     @Builder
-    public Sites(String site_name,
-                 String category_1,
-                 String category_2,
-                 String category_3,
-                 String site_url) {
+    public Sites(String siteName,
+                 String categoryB,
+                 String categoryM,
+                 String categoryS,
+                 String siteUrl,
+                 String siteDetail) {
 
-        this.site_name = site_name;
-        this.category_1 = category_1;
-        this.category_2 = category_2;
-        this.category_3 = category_3;
-        this.site_url = site_url;
+        this.siteName = siteName;
+        this.categoryB = categoryB;
+        this.categoryM = categoryM;
+        this.categoryS = categoryS;
+        this.siteUrl = siteUrl;
+        this.siteDetail = siteDetail;
     }
 
-    public void update(String site_name,
-                       String category_1,
-                       String category_2,
-                       String category_3,
-                       String site_url) {
+    public void update(String siteName,
+                       String categoryB,
+                       String categoryM,
+                       String categoryS,
+                       String siteUrl,
+                       String siteDetail) {
 
-        this.site_name = site_name;
-        this.category_1 = category_1;
-        this.category_2 = category_2;
-        this.category_3 = category_3;
-        this.site_url = site_url;
+        this.siteName = siteName;
+        this.categoryB = categoryB;
+        this.categoryM = categoryM;
+        this.categoryS = categoryS;
+        this.siteUrl = siteUrl;
+        this.siteDetail = siteDetail;
     }
 }

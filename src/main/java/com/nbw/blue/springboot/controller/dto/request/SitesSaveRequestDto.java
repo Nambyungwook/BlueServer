@@ -9,32 +9,36 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SitesSaveRequestDto {
 
-    private String site_name;
-    private String category_1;
-    private String category_2;
-    private String category_3;
-    private String site_url;
+    private String siteName;
+    private String categoryB;
+    private String categoryM;
+    private String categoryS;
+    private String siteUrl;
+    private String siteDetail;
 
     @Builder
-    public SitesSaveRequestDto(String site_name,
-                               String category_1,
-                               String category_2,
-                               String category_3,
-                               String site_url) {
-        this.site_name = site_name;
-        this.category_1 = category_1;
-        this.category_2 = category_2;
-        this.category_3 = category_3;
-        this.site_url = site_url;
+    public SitesSaveRequestDto(String siteName,
+                               String categoryB,
+                               String categoryM,
+                               String categoryS,
+                               String siteUrl,
+                               String siteDetail) {
+        this.siteName = siteName;
+        this.categoryB = categoryB;
+        this.categoryM = categoryM;
+        this.categoryS = categoryS;
+        this.siteUrl = siteUrl;
+        this.siteDetail =siteDetail;
     }
 
     public Sites toEntity() {
         return Sites.builder()
-                .site_name(site_name)
-                .category_1(category_1)
-                .category_2(category_2)
-                .category_3(category_3)
-                .site_url(site_url)
+                .siteName(siteName)
+                .categoryB(categoryB)
+                .categoryM(categoryM)
+                .categoryS(categoryS)
+                .siteUrl(siteUrl)
+                .siteDetail(siteDetail)
                 .build();
     }
 }

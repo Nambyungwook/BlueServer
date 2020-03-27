@@ -9,24 +9,27 @@ import lombok.NoArgsConstructor;
 public class SitesUpdateRequestDto {
 
     private Long id;
-    private String site_name;
-    private String category_1;
-    private String category_2;
-    private String category_3;
-    private String site_url;
+    private String siteName;
+    private String categoryB;
+    private String categoryM;
+    private String categoryS;
+    private String siteUrl;
+    private String siteDetail;
 
     @Builder
     public SitesUpdateRequestDto(Long id,
-                                 String site_name,
-                                 String category_1,
-                                 String category_2,
-                                 String category_3,
-                                 String site_url) {
+                                 String siteName,
+                                 String categoryB,
+                                 String categoryM,
+                                 String categoryS,
+                                 String siteUrl,
+                                 String siteDetail) {
         this.id = id;
-        this.site_name = site_name;
-        this.category_1 = category_1;
-        this.category_2 = category_2;
-        this.category_3 = category_3;
-        this.site_url = site_url;
+        this.siteName = siteName;
+        this.categoryB = categoryB;
+        this.categoryM = categoryM;
+        this.categoryS = categoryS;
+        this.siteUrl = siteUrl;
+        this.siteDetail = siteDetail;
     }
 }
