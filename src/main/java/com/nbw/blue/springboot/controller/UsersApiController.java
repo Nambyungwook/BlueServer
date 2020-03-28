@@ -2,12 +2,10 @@ package com.nbw.blue.springboot.controller;
 
 import com.nbw.blue.springboot.controller.dto.request.UserSavedSitesSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersSigninRequestDto;
-import com.nbw.blue.springboot.controller.dto.response.CommonResponeseDto;
-import com.nbw.blue.springboot.controller.dto.response.SignStatusResponseDto;
-import com.nbw.blue.springboot.controller.dto.response.UserSavedSitesResponseDto;
-import com.nbw.blue.springboot.controller.dto.response.UsersResponseDto;
+import com.nbw.blue.springboot.controller.dto.response.*;
 import com.nbw.blue.springboot.controller.dto.request.UsersSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.UsersUpdateRequestDto;
+import com.nbw.blue.springboot.domain.sites.UserSavedSitesRepository;
 import com.nbw.blue.springboot.service.users.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsersApiController {
 
     private final UsersService usersService;
+    private final UserSavedSitesRepository userSavedSitesRepository;
 
     //서버확인
     @GetMapping("/blue/v1/check")
@@ -83,10 +82,17 @@ public class UsersApiController {
     }
 
     //사용자가 사이트 저장
-    @PostMapping("/blue/v1/users/save/sites")
+    @PostMapping("/blue/v1/users/save/sites/")
     public UserSavedSitesResponseDto saveSites(@RequestBody UserSavedSitesSaveRequestDto requestDto) {
 
         return usersService.saveSites(requestDto);
+    }
+
+    //사용자가 저장한 사이트 목록 조회
+    @GetMapping("/blue/v1/users/sites/{uid}")
+    public UserSavedSitesListResponseDto saveSites(@PathVariable String uid) {
+
+        return new UserSavedSitesListResponseDto("SUCCESS", userSavedSitesRepository.findByUid(uid));
     }
 
     //회원탈퇴

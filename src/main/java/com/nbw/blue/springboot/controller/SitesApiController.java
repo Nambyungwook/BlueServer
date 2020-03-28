@@ -25,16 +25,16 @@ public class SitesApiController {
                                          @RequestParam(required = false) String categoryS,
                                          @RequestParam(required = false) String siteName) {
 
-        if (siteName != null) {
+        if (!siteName.equals("NA")) {
             return new SitesListResponseDto("SUCCESS", sitesRepository.findBySiteName(siteName));
-        } else if (categoryS != null) {
+        } else if (!categoryS.equals("NA")) {
             return new SitesListResponseDto("SUCCESS", sitesRepository.findByCategoryS(categoryS));
-        } else if (categoryM != null) {
+        } else if (!categoryM.equals("NA")) {
             return new SitesListResponseDto("SUCCESS", sitesRepository.findByCategoryM(categoryM));
-        } else if (categoryB != null) {
-            return new SitesListResponseDto("SUCCESS", sitesRepository.findByCategoryB(categoryB).subList(page, size));
+        } else if (!categoryB.equals("NA")) {
+            return new SitesListResponseDto("SUCCESS", sitesRepository.findByCategoryB(categoryB));
         } else {
-            return new SitesListResponseDto("SUCCESS", sitesRepository.findAll( ).subList(page, size));
+            return new SitesListResponseDto("SUCCESS", sitesRepository.findAll( ));
         }
     }
 
