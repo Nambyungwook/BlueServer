@@ -6,8 +6,6 @@ import com.nbw.blue.springboot.controller.dto.response.SitesResponseDto;
 import com.nbw.blue.springboot.domain.sites.Sites;
 import com.nbw.blue.springboot.domain.sites.SitesRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +24,12 @@ public class SitesService {
     public SitesResponseDto update(Long id, SitesUpdateRequestDto requestDto) {
         Sites sites = sitesRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 사이트가 없습니다. id=" + id));
         sites.update(requestDto.getSiteName(),
-                requestDto.getCategoryB(),
-                requestDto.getCategoryM(),
-                requestDto.getCategoryS(),
+                requestDto.getTargetMain(),
+                requestDto.getTargetDetail(),
+                requestDto.getLocal(),
+                requestDto.getIncome(),
+                requestDto.getAge(),
+                requestDto.getGender(),
                 requestDto.getSiteUrl(),
                 requestDto.getSiteDetail());
 

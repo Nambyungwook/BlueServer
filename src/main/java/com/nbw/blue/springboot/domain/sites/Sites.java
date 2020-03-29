@@ -20,14 +20,23 @@ public class Sites extends BaseTimeEntity {
     @Column(name = "siteName", columnDefinition = "varchar(30)", nullable = false)
     private String siteName;
 
-    @Column(name = "categoryB", columnDefinition = "varchar(30)", nullable = false)
-    private String categoryB;
+    @Column(name = "targetMain", columnDefinition = "varchar(30)", nullable = false)
+    private String targetMain;
 
-    @Column(name = "categoryM",columnDefinition = "varchar(30)", nullable = false)
-    private String categoryM;
+    @Column(name = "targetDetail",columnDefinition = "varchar(30)", nullable = false)
+    private String targetDetail;
 
-    @Column(name = "categoryS", columnDefinition = "varchar(30)")
-    private String categoryS;
+    @Column(name = "local", columnDefinition = "varchar(30)", nullable = false)
+    private String local;
+
+    @Column(name = "income", columnDefinition = "varchar(30)", nullable = false)
+    private String income;
+
+    @Column(name = "age", columnDefinition = "varchar(30)", nullable = false)
+    private String age;
+
+    @Column(name = "gender", columnDefinition = "varchar(30)", nullable = false)
+    private String gender;
 
     @Column(name = "siteUrl", nullable = false)
     private String siteUrl;
@@ -37,31 +46,43 @@ public class Sites extends BaseTimeEntity {
 
     @Builder
     public Sites(String siteName,
-                 String categoryB,
-                 String categoryM,
-                 String categoryS,
+                 String targetMain,
+                 String targetDetail,
+                 String local,
+                 String income,
+                 String age,
+                 String gender,
                  String siteUrl,
                  String siteDetail) {
 
         this.siteName = siteName;
-        this.categoryB = categoryB;
-        this.categoryM = categoryM;
-        this.categoryS = categoryS;
+        this.targetMain = targetMain;
+        this.targetDetail = targetDetail;
+        this.local = local;
+        this.income = income;
+        this.age = age;
+        this.gender = gender;
         this.siteUrl = siteUrl;
         this.siteDetail = siteDetail;
     }
 
     public void update(String siteName,
-                       String categoryB,
-                       String categoryM,
-                       String categoryS,
+                       String targetMain,
+                       String targetDetail,
+                       String local,
+                       String income,
+                       String age,
+                       String gender,
                        String siteUrl,
                        String siteDetail) {
 
         this.siteName = siteName;
-        this.categoryB = categoryB;
-        this.categoryM = categoryM;
-        this.categoryS = categoryS;
+        this.targetMain = targetMain;
+        this.targetDetail = targetDetail;
+        this.local = local;
+        this.income = income;
+        this.age = age;
+        this.gender = gender;
         this.siteUrl = siteUrl;
         this.siteDetail = siteDetail;
     }

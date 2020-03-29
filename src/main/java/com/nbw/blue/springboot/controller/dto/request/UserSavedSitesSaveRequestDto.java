@@ -6,27 +6,19 @@ import lombok.Builder;
 
 public class UserSavedSitesSaveRequestDto {
     private String uid;
-    private String siteName;
-    private String siteUrl;
-    private String siteDetail;
+    private Long siteId;
 
     @Builder
     public UserSavedSitesSaveRequestDto(String uid,
-                                        String siteName,
-                                        String siteUrl,
-                                        String siteDetail) {
+                                        Long siteId) {
         this.uid = uid;
-        this.siteName = siteName;
-        this.siteUrl = siteUrl;
-        this.siteDetail = siteDetail;
+        this.siteId = siteId;
     }
 
     public UserSavedSites toEntity() {
         return UserSavedSites.builder()
                 .uid(uid)
-                .siteName(siteName)
-                .siteUrl(siteUrl)
-                .siteDetail(siteDetail)
+                .siteId(siteId)
                 .build();
     }
 }

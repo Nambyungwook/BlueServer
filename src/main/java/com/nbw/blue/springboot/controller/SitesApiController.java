@@ -16,26 +16,20 @@ public class SitesApiController {
     private final SitesService sitesService;
     private final SitesRepository sitesRepository;
 
-    //전체 목록 조회
+    //전체 목록 조회 - 후에 사이트 데이터가 방대해 지면 불러올때 나눠서 불러오도록 수정해야 한다. 그것을 위해 page, size 변수를 만들었다.
     @GetMapping("/blue/v1/sites/")
     public SitesListResponseDto getSites(@RequestParam(defaultValue = "0") int page,
                                          @RequestParam(defaultValue = "10") int size,
-                                         @RequestParam(required = false) String categoryB,
-                                         @RequestParam(required = false) String categoryM,
-                                         @RequestParam(required = false) String categoryS,
+                                         @RequestParam(required = false) String targetMain,
+                                         @RequestParam(required = false) String targetDetail,
+                                         @RequestParam(required = false) String local,
+                                         @RequestParam(required = false) String income,
+                                         @RequestParam(required = false) String age,
+                                         @RequestParam(required = false) String gender,
                                          @RequestParam(required = false) String siteName) {
 
-        if (!siteName.equals("NA")) {
-            return new SitesListResponseDto("SUCCESS", sitesRepository.findBySiteName(siteName));
-        } else if (!categoryS.equals("NA")) {
-            return new SitesListResponseDto("SUCCESS", sitesRepository.findByCategoryS(categoryS));
-        } else if (!categoryM.equals("NA")) {
-            return new SitesListResponseDto("SUCCESS", sitesRepository.findByCategoryM(categoryM));
-        } else if (!categoryB.equals("NA")) {
-            return new SitesListResponseDto("SUCCESS", sitesRepository.findByCategoryB(categoryB));
-        } else {
-            return new SitesListResponseDto("SUCCESS", sitesRepository.findAll( ));
-        }
+        return new SitesListResponseDto("SUCCESS",
+                sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, income, age, gender,siteName));
     }
 
     //사이트 추가

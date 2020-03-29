@@ -9,16 +9,12 @@ public class UserSavedSitesResponseDto {
 
     private Long id;
     private String uid;
-    private String siteName;
-    private String siteUrl;
-    private String siteDetail;
+    private Long siteId;
 
     @Builder
     public UserSavedSitesResponseDto(UserSavedSites entity) {
         this.id = entity.getId();
         this.uid = entity.getUid();
-        this.siteName = entity.getSiteName();
-        this.siteUrl = entity.getSiteUrl();
-        this.siteDetail = entity.getSiteDetail();
+        this.siteId = entity.getSiteId();
     }
 }

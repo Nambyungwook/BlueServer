@@ -9,9 +9,12 @@ public class SitesResponseDto {
 
     private Long id;
     private String siteName;
-    private String categoryB;
-    private String categoryM;
-    private String categoryS;
+    private String targetMain;
+    private String targetDetail;
+    private String local;
+    private String income;
+    private String age;
+    private String gender;
     private String siteUrl;
     private String siteDetail;
 
@@ -19,9 +22,12 @@ public class SitesResponseDto {
     public SitesResponseDto(Sites entity) {
         this.id = entity.getId();
         this.siteName = entity.getSiteName();
-        this.categoryB = entity.getCategoryB();
-        this.categoryM = entity.getCategoryM();
-        this.categoryS = entity.getCategoryS();
+        this.targetMain = entity.getTargetMain();
+        this.targetDetail = entity.getTargetDetail();
+        this.local = entity.getLocal();
+        this.income = entity.getIncome();
+        this.age = entity.getAge();
+        this.gender = entity.getGender();
         this.siteUrl = entity.getSiteUrl();
         this.siteDetail = entity.getSiteDetail();
     }

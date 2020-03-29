@@ -10,25 +10,34 @@ public class SitesUpdateRequestDto {
 
     private Long id;
     private String siteName;
-    private String categoryB;
-    private String categoryM;
-    private String categoryS;
+    private String targetMain;
+    private String targetDetail;
+    private String local;
+    private String income;
+    private String age;
+    private String gender;
     private String siteUrl;
     private String siteDetail;
 
     @Builder
     public SitesUpdateRequestDto(Long id,
                                  String siteName,
-                                 String categoryB,
-                                 String categoryM,
-                                 String categoryS,
+                                 String targetMain,
+                                 String targetDetail,
+                                 String local,
+                                 String income,
+                                 String age,
+                                 String gender,
                                  String siteUrl,
                                  String siteDetail) {
         this.id = id;
         this.siteName = siteName;
-        this.categoryB = categoryB;
-        this.categoryM = categoryM;
-        this.categoryS = categoryS;
+        this.targetMain = targetMain;
+        this.targetDetail = targetDetail;
+        this.local = local;
+        this.income = income;
+        this.age = age;
+        this.gender = gender;
         this.siteUrl = siteUrl;
         this.siteDetail = siteDetail;
     }

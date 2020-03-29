@@ -20,23 +20,14 @@ public class UserSavedSites extends BaseTimeEntity {
     @Column(name = "uid", columnDefinition = "varchar(10)", nullable = false)
     private String uid;
 
-    @Column(name = "siteName", columnDefinition = "varchar(30)", nullable = false)
-    private String siteName;
+    @Column(name = "siteId", nullable = false)
+    private Long siteId;
 
-    @Column(name = "siteUrl", nullable = false)
-    private String siteUrl;
-
-    @Column(name = "siteDetail", nullable = false)
-    private String siteDetail;
 
     @Builder
     public UserSavedSites(String uid,
-                          String siteName,
-                          String siteUrl,
-                          String siteDetail) {
+                          Long siteId) {
         this.uid = uid;
-        this.siteName = siteName;
-        this.siteUrl = siteUrl;
-        this.siteDetail = siteDetail;
+        this.siteId = siteId;
     }
 }

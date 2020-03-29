@@ -10,33 +10,45 @@ import lombok.NoArgsConstructor;
 public class SitesSaveRequestDto {
 
     private String siteName;
-    private String categoryB;
-    private String categoryM;
-    private String categoryS;
+    private String targetMain;
+    private String targetDetail;
+    private String local;
+    private String income;
+    private String age;
+    private String gender;
     private String siteUrl;
     private String siteDetail;
 
     @Builder
     public SitesSaveRequestDto(String siteName,
-                               String categoryB,
-                               String categoryM,
-                               String categoryS,
+                               String targetMain,
+                               String targetDetail,
+                               String local,
+                               String income,
+                               String age,
+                               String gender,
                                String siteUrl,
                                String siteDetail) {
         this.siteName = siteName;
-        this.categoryB = categoryB;
-        this.categoryM = categoryM;
-        this.categoryS = categoryS;
+        this.targetMain = targetMain;
+        this.targetDetail = targetDetail;
+        this.local = local;
+        this.income = income;
+        this.age = age;
+        this.gender = gender;
         this.siteUrl = siteUrl;
-        this.siteDetail =siteDetail;
+        this.siteDetail = siteDetail;
     }
 
     public Sites toEntity() {
         return Sites.builder()
                 .siteName(siteName)
-                .categoryB(categoryB)
-                .categoryM(categoryM)
-                .categoryS(categoryS)
+                .targetMain(targetMain)
+                .targetDetail(targetDetail)
+                .local(local)
+                .income(income)
+                .age(age)
+                .gender(gender)
                 .siteUrl(siteUrl)
                 .siteDetail(siteDetail)
                 .build();

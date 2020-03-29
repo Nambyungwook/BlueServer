@@ -24,24 +24,27 @@ public class UsersService {
     private final SignStatusRepository signStatusRepository;
     private final UserSavedSitesRepository userSavedSitesRepository;
 
+    //사용자 정보 저장 - 회원가입
     @Transactional
     public UsersResponseDto save(UsersSaveRequestDto requestDto) {
         return new UsersResponseDto(usersRepository.save(requestDto.toEntity()));
     }
 
+    //사용자별 사이트 저장
     @Transactional
     public UserSavedSitesResponseDto saveSites(UserSavedSitesSaveRequestDto requestDto) {
         return new UserSavedSitesResponseDto(userSavedSitesRepository.save(requestDto.toEntity()));
     }
 
+    //사용자별 사이트 삭제 - uid와 사이트 id 이용
     @Transactional
-    public CommonResponeseDto deleteSites(String uid, String siteName) {
+    public CommonResponeseDto deleteSites(String uid, Long siteId) {
 
         List<UserSavedSites> userSavedSitesList = userSavedSitesRepository.findByUid(uid);
 
         int cnt = 0;
         for (int i=0; i<userSavedSitesList.size(); i++) {
-            if (userSavedSitesList.get(i).getSiteName().equals(siteName)) {
+            if (userSavedSitesList.get(i).getSiteId().equals(siteId)) {
                 userSavedSitesRepository.delete(userSavedSitesList.get(i));
 
                 break;
@@ -49,15 +52,16 @@ public class UsersService {
             cnt++;
 
             if (cnt==userSavedSitesList.size()) {
-                CommonResponeseDto responeseDto = new CommonResponeseDto("FAIL", "해당 사이트가 업습니다.", siteName);
+                CommonResponeseDto responeseDto = new CommonResponeseDto("FAIL", "해당 사이트가 업습니다. siteId = ", siteId+"");
                 return responeseDto;
             }
         }
 
-        CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "저장한 사이트 제거 성공", siteName);
+        CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "저장한 사이트 제거 성공. siteId = ", siteId+"");
         return responeseDto;
     }
 
+    //사용자 정보 수정
     @Transactional
     public UsersResponseDto update(String uid, UsersUpdateRequestDto requestDto) {
         Users users = usersRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
@@ -74,6 +78,7 @@ public class UsersService {
         return new UsersResponseDto(users);
     }
 
+    //사용자 삭제 - index사용
     @Transactional
     public void delete(Long id) {
         Users users = usersRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
@@ -81,6 +86,7 @@ public class UsersService {
         usersRepository.delete(users);
     }
 
+    //로그인
     @Transactional
     public CommonResponeseDto signin(UsersSigninRequestDto requestDto) {
         Users users = usersRepository.findByEmail(requestDto.getEmail()).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다."));
@@ -104,6 +110,7 @@ public class UsersService {
         }
     }
 
+    //로그아웃
     @Transactional
     public CommonResponeseDto signout(String uid) {
 
@@ -120,6 +127,7 @@ public class UsersService {
         }
     }
 
+    //회원탈퇴
     @Transactional
     public CommonResponeseDto dropUser(String uid) {
         Users users = usersRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
@@ -132,6 +140,7 @@ public class UsersService {
         return responeseDto;
     }
 
+    //로그인 상태 조회
     @Transactional
     public SignStatusResponseDto getStatus(String uid) {
         SignStatus signStatus = signStatusRepository.findByUid(uid).orElse(SignStatus.builder().uid(uid).sign_status(true).build());
@@ -145,18 +154,21 @@ public class UsersService {
         }
     }
 
+    //uid로 사용자 검색
     public UsersResponseDto findByUid(String uid) {
         Users entity = usersRepository.findByUid(uid).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
 
         return new UsersResponseDto(entity);
     }
 
+    //id로 사용자 검색
     public UsersResponseDto findById(Long id) {
         Users entity = usersRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
 
         return new UsersResponseDto(entity);
     }
 
+    //서버 연결되어있는지 확인하는 코드
     public CommonResponeseDto checkServer() {
         return new CommonResponeseDto("SUCCESS", "SERVER_CONNECT", "000000");
     }

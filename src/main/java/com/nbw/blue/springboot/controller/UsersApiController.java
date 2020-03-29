@@ -95,10 +95,10 @@ public class UsersApiController {
         return new UserSavedSitesListResponseDto("SUCCESS", userSavedSitesRepository.findByUid(uid));
     }
 
-    //회원탈퇴
-    @GetMapping("/blue/v1/users/delete/site/{uid}/{siteName}")
-    public CommonResponeseDto deleteSites(@PathVariable String uid, @PathVariable String siteName) {
+    //저장한 사이트 삭제
+    @GetMapping("/blue/v1/users/delete/site/{uid}/{siteId}")
+    public CommonResponeseDto deleteSites(@PathVariable String uid, @PathVariable Long siteId) {
 
-        return usersService.deleteSites(uid, siteName);
+        return usersService.deleteSites(uid, siteId);
     }
 }
