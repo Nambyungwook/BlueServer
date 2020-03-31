@@ -16,11 +16,11 @@ import java.util.List;
 public class UserSavedSitesListResponseDto {
 
     private String response_code;
-    private List<UserSavedSites> sites;
+    private List<Sites> savedSites;
 
     @Builder
-    public UserSavedSitesListResponseDto(String response_code, List<UserSavedSites> sites) {
+    public UserSavedSitesListResponseDto(String response_code, List<Sites> savedSites) {
         this.response_code = response_code;
-        this.sites = sites;
+        this.savedSites = savedSites;
     }
 }

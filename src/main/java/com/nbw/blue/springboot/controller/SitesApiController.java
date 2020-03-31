@@ -4,10 +4,16 @@ import com.nbw.blue.springboot.controller.dto.request.SitesSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.SitesUpdateRequestDto;
 import com.nbw.blue.springboot.controller.dto.response.SitesListResponseDto;
 import com.nbw.blue.springboot.controller.dto.response.SitesResponseDto;
+import com.nbw.blue.springboot.domain.sites.Sites;
 import com.nbw.blue.springboot.domain.sites.SitesRepository;
 import com.nbw.blue.springboot.service.sites.SitesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.TreeSet;
 
 @RequiredArgsConstructor
 @RestController
@@ -28,8 +34,10 @@ public class SitesApiController {
                                          @RequestParam(required = false) String gender,
                                          @RequestParam(required = false) String siteName) {
 
-        return new SitesListResponseDto("SUCCESS",
-                sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, income, age, gender,siteName));
+        List<Sites> searchedSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, income, age, gender, siteName);
+
+        return new SitesListResponseDto("SUCCESS", searchedSitesList);
+
     }
 
     //사이트 추가

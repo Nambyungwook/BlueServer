@@ -33,7 +33,11 @@ public class UsersService {
     //사용자별 사이트 저장
     @Transactional
     public UserSavedSitesResponseDto saveSites(UserSavedSitesSaveRequestDto requestDto) {
-        return new UserSavedSitesResponseDto(userSavedSitesRepository.save(requestDto.toEntity()));
+        Long savedSiteId = requestDto.toEntity().getSiteId();
+        if (userSavedSitesRepository.findAllByUidContainingAndId(requestDto.toEntity().getUid(), savedSiteId).isPresent()) {
+            return new UserSavedSitesResponseDto(requestDto.toEntity(), "FAIL");
+        }
+        return new UserSavedSitesResponseDto(userSavedSitesRepository.save(requestDto.toEntity()), "SUCCESS");
     }
 
     //사용자별 사이트 삭제 - uid와 사이트 id 이용
