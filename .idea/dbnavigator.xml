@@ -23,11 +23,15 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
+        <schema name="blue_app_server" object-types="view, function, procedure, table" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
-      <console name="blue" type="STANDARD" schema="" session="Main"><![CDATA[use blue_app_server;
+      <console name="blue" type="STANDARD" schema="blue_app_server" session="Main">use blue_app_server;
 
 show variables like 'c%';
 
@@ -37,45 +41,58 @@ COLLATE = 'utf8mb4_general_ci';
 
 select @@time_zone, now();
 
-create TABLE test (
-    id bigint(20) NOT NULL AUTO_INCREMENT,
-    content varchar(255) DEFAULT NULL,
-    PRIMARY KEY (id)
-) ENGINE=InnoDB;
-
-insert into test(content) value ('테스트');
-
-select * from test;
-
 create table users (
-    id bigint not null auto_increment,
-    created_date timestamp,
-    modified_date timestamp,
-    appdoc_index bigint,
-    birthday varchar(10),
-    email varchar(30) not null,
-    gender varchar(1),
-    income integer,
-    interest varchar(255),
-    job varchar(20),
-    local varchar(30),
-    name varchar(255),
-    phone varchar(13),
-    pwd varchar(15) not null,
-    sign_type varchar(255),
-    uid varchar(10) not null,
-    primary key (id)
-    );
+    id bigint not null auto_increment, 
+    created_date timestamp, 
+    modified_date timestamp, 
+    appdoc_index bigint, 
+    birthday varchar(10), 
+    email varchar(30) not null, 
+    gender varchar(1), 
+    income integer, 
+    interest varchar(255), 
+    job varchar(20), 
+    local varchar(30), 
+    name varchar(255), 
+    phone varchar(13), 
+    pwd varchar(255) not null, 
+    sign_type varchar(255), 
+    terms_agree varchar(255), 
+    uid varchar(10) not null, 
+    primary key (id));
     
 create table sign_status (
     id bigint not null auto_increment,
-    created_date timestamp,
-    modified_date timestamp,
-    sign_status boolean not null,
-    uid varchar(10) not null,
+    created_date timestamp, 
+    modified_date timestamp, 
+    sign_status boolean not null, 
+    uid varchar(10) not null, 
+    primary key (id));
+    
+create table sites (
+    id bigint not null auto_increment,
+    created_date timestamp, 
+    modified_date timestamp, 
+    age varchar(30) not null, 
+    gender varchar(30) not null, 
+    income varchar(30) not null, 
+    local varchar(30) not null, 
+    site_detail varchar(255) not null, 
+    site_name varchar(30) not null, 
+    site_url varchar(255) not null, 
+    target_detail varchar(30) not null, 
+    target_main varchar(30) not null, 
     primary key (id)
     );
 
+create table user_saved_sites (
+    id bigint not null auto_increment,
+    created_date timestamp, 
+    modified_date timestamp, 
+    site_id bigint not null, 
+    uid varchar(10) not null, 
+    primary key (id)
+    );
 
 CREATE TABLE SPRING_SESSION (
 	PRIMARY_ID CHAR(36) NOT NULL,
@@ -102,9 +119,7 @@ CREATE TABLE SPRING_SESSION_ATTRIBUTES (
 
 select * from users;
 
-select * from sign_status;
-
-select * from test;]]></console>
+select * from sign_status;</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

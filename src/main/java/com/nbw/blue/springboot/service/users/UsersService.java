@@ -1,10 +1,7 @@
 package com.nbw.blue.springboot.service.users;
 
 import com.nbw.blue.springboot.controller.dto.request.*;
-import com.nbw.blue.springboot.controller.dto.response.CommonResponeseDto;
-import com.nbw.blue.springboot.controller.dto.response.SignStatusResponseDto;
-import com.nbw.blue.springboot.controller.dto.response.UserSavedSitesResponseDto;
-import com.nbw.blue.springboot.controller.dto.response.UsersResponseDto;
+import com.nbw.blue.springboot.controller.dto.response.*;
 import com.nbw.blue.springboot.domain.signstatus.SignStatus;
 import com.nbw.blue.springboot.domain.signstatus.SignStatusRepository;
 import com.nbw.blue.springboot.domain.sites.UserSavedSites;
@@ -12,6 +9,8 @@ import com.nbw.blue.springboot.domain.sites.UserSavedSitesRepository;
 import com.nbw.blue.springboot.domain.users.Users;
 import com.nbw.blue.springboot.domain.users.UsersRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -170,6 +169,13 @@ public class UsersService {
         Users entity = usersRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
 
         return new UsersResponseDto(entity);
+    }
+
+    //전체 사용자 조회
+    public UsersListResponseDto findAll(Pageable pageable) {
+        Page<Users> allUsersList = usersRepository.findAll(pageable);
+
+        return new UsersListResponseDto("SUCCESS", allUsersList);
     }
 
     //서버 연결되어있는지 확인하는 코드

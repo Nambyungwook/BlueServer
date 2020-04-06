@@ -29,14 +29,25 @@ public class SitesApiController {
                                          @RequestParam(required = false) String targetMain,
                                          @RequestParam(required = false) String targetDetail,
                                          @RequestParam(required = false) String local,
+                                         @RequestParam(required = false) String allLocal,
                                          @RequestParam(required = false) String income,
                                          @RequestParam(required = false) String age,
                                          @RequestParam(required = false) String gender,
                                          @RequestParam(required = false) String siteName) {
 
-        List<Sites> searchedSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, income, age, gender, siteName);
+        if (allLocal.equals("1")) {
+            List<Sites> searchedSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, income, age, gender, siteName);
+            List<Sites> allLocalSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, "전국", income, age, gender, siteName);
 
-        return new SitesListResponseDto("SUCCESS", searchedSitesList);
+            List<Sites> retSitesList = new ArrayList<>();
+            retSitesList.addAll(searchedSitesList);
+            retSitesList.addAll(allLocalSitesList);
+
+            return new SitesListResponseDto("SUCCESS", retSitesList);
+        } else {
+            List<Sites> searchedSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, income, age, gender, siteName);
+            return new SitesListResponseDto("SUCCESS", searchedSitesList);
+        }
 
     }
 
