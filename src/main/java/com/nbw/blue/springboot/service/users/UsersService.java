@@ -75,13 +75,29 @@ public class UsersService {
     @Transactional
     public UsersResponseDto update(String uid, UsersUpdateRequestDto requestDto) {
 
-        //전화번호가 이미 존재하면 새로 저장하지 않음
-        if (usersRepository.findByPhone(requestDto.getPhone()).isPresent()) {
-            Users users = usersRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
-            return new UsersResponseDto("FAIL",users);
+        Users users = usersRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
+
+        //지금 입력한 전화번호와 저장된 번호가 같은지 확인
+        if (!requestDto.getPhone().equals(users.getPhone())) {
+            //다른 전화번호인데 전화번호가 이미 존재하면 새로 저장하지 않음
+            if (usersRepository.findByPhone(requestDto.getPhone()).isPresent()) {
+                return new UsersResponseDto("FAIL",users);
+            } else {
+                //다른 전화 번호인데 전화번호가 존재 하지 않으므로 바뀐 내용을 저장
+                users.update(requestDto.getName(),
+                        requestDto.getBirthday(),
+                        requestDto.getGender(),
+                        requestDto.getLocal(),
+                        requestDto.getJob(),
+                        requestDto.getInterest(),
+                        requestDto.getIncome(),
+                        requestDto.getPhone(),
+                        requestDto.getAppdoc_index());
+
+                return new UsersResponseDto("SUCCESS",users);
+            }
         } else {
-            //전화번호가 존재 하지 않으므로 바뀐 내용을 저장
-            Users users = usersRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
+            //원래 입력되어있는 번호와 같기 때문에 그냥 저장
             users.update(requestDto.getName(),
                     requestDto.getBirthday(),
                     requestDto.getGender(),
