@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class UsersResponseDto {
 
+    private String responseCode;
     private Long id;
     private String uid;
     private String email;
@@ -24,7 +25,8 @@ public class UsersResponseDto {
     private String terms_agree;
 
     @Builder
-    public UsersResponseDto(Users entity) {
+    public UsersResponseDto(String responseCode,Users entity) {
+        this.responseCode = responseCode;
         this.id = entity.getId();
         this.uid = entity.getUid();
         this.email = entity.getEmail();

@@ -44,7 +44,7 @@ public class UsersApiController {
 
     //회원가입
     @PostMapping("/blue/v1/users/signup")
-    public UsersResponseDto save(@RequestBody UsersSaveRequestDto requestDto) {
+    public CommonResponeseDto save(@RequestBody UsersSaveRequestDto requestDto) {
         return usersService.save(requestDto);
     }
 

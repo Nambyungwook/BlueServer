@@ -8,6 +8,7 @@ import com.nbw.blue.springboot.domain.sites.UserSavedSites;
 import com.nbw.blue.springboot.domain.sites.UserSavedSitesRepository;
 import com.nbw.blue.springboot.domain.users.Users;
 import com.nbw.blue.springboot.domain.users.UsersRepository;
+import com.nbw.blue.springboot.error.ResponseCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,8 +26,14 @@ public class UsersService {
 
     //사용자 정보 저장 - 회원가입
     @Transactional
-    public UsersResponseDto save(UsersSaveRequestDto requestDto) {
-        return new UsersResponseDto(usersRepository.save(requestDto.toEntity()));
+    public CommonResponeseDto save(UsersSaveRequestDto requestDto) {
+        //이미 존재하는 이메일인지 확인
+        if (usersRepository.findByEmail(requestDto.getEmail()).isPresent()) {
+            return new CommonResponeseDto("FAIL", ResponseCode.ALREADY_EXIST_USER.getMessage(), null);
+        } else {
+            Users users = usersRepository.save(requestDto.toEntity());
+            return new CommonResponeseDto("SUCCESS", ResponseCode.SUCCESS.getMessage(), users.getUid());
+        }
     }
 
     //사용자별 사이트 저장
@@ -67,18 +74,26 @@ public class UsersService {
     //사용자 정보 수정
     @Transactional
     public UsersResponseDto update(String uid, UsersUpdateRequestDto requestDto) {
-        Users users = usersRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
-        users.update(requestDto.getName(),
-                     requestDto.getBirthday(),
-                     requestDto.getGender(),
-                     requestDto.getLocal(),
-                     requestDto.getJob(),
-                     requestDto.getInterest(),
-                     requestDto.getIncome(),
-                     requestDto.getPhone(),
-                     requestDto.getAppdoc_index());
 
-        return new UsersResponseDto(users);
+        //전화번호가 이미 존재하면 새로 저장하지 않음
+        if (usersRepository.findByPhone(requestDto.getPhone()).isPresent()) {
+            Users users = usersRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
+            return new UsersResponseDto("FAIL",users);
+        } else {
+            //전화번호가 존재 하지 않으므로 바뀐 내용을 저장
+            Users users = usersRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
+            users.update(requestDto.getName(),
+                    requestDto.getBirthday(),
+                    requestDto.getGender(),
+                    requestDto.getLocal(),
+                    requestDto.getJob(),
+                    requestDto.getInterest(),
+                    requestDto.getIncome(),
+                    requestDto.getPhone(),
+                    requestDto.getAppdoc_index());
+
+            return new UsersResponseDto("SUCCESS",users);
+        }
     }
 
     //사용자 삭제 - index사용
@@ -161,14 +176,14 @@ public class UsersService {
     public UsersResponseDto findByUid(String uid) {
         Users entity = usersRepository.findByUid(uid).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
 
-        return new UsersResponseDto(entity);
+        return new UsersResponseDto("SUCCESS", entity);
     }
 
     //id로 사용자 검색
     public UsersResponseDto findById(Long id) {
         Users entity = usersRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
 
-        return new UsersResponseDto(entity);
+        return new UsersResponseDto("SUCCESS", entity);
     }
 
     //전체 사용자 조회

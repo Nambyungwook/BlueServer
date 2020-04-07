@@ -13,12 +13,12 @@ import java.util.List;
 @Setter
 @Builder
 public class SitesListResponseDto {
-    private String response_code;
+    private String responseCode;
     private List<Sites> sites;
 
     @Builder
-    public SitesListResponseDto(String response_code, List<Sites> sites) {
-        this.response_code = response_code;
+    public SitesListResponseDto(String responseCode, List<Sites> sites) {
+        this.responseCode = responseCode;
         this.sites = sites;
     }
 }

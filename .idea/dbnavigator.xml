@@ -23,15 +23,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
-        <schema name="blue_app_server" object-types="view, function, procedure, table" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
-      <console name="blue" type="STANDARD" schema="blue_app_server" session="Main">use blue_app_server;
+      <console name="blue" type="STANDARD" schema="blue_app_server" session="Main"><![CDATA[use blue_app_server;
 
 show variables like 'c%';
 
@@ -119,7 +115,9 @@ CREATE TABLE SPRING_SESSION_ATTRIBUTES (
 
 select * from users;
 
-select * from sign_status;</console>
+#delete from users where id = 7;
+select * from sign_status;
+#delete from sign_status where id = 6;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
