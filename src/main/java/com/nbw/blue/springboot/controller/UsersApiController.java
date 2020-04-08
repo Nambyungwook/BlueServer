@@ -54,10 +54,16 @@ public class UsersApiController {
         return usersService.update(uid, requestDto);
     }
 
-    //회원정보조회
+    //회원정보조회 - uid
     @GetMapping("/blue/v1/users/userinfo/{uid}")
     public UsersResponseDto findByUid(@PathVariable String uid) {
         return usersService.findByUid(uid);
+    }
+
+    //회원정보조회 - email
+    @GetMapping("/blue/v1/users/userinfo")
+    public UsersResponseDto findByEmail(@RequestParam String email) {
+        return usersService.findByEmail(email);
     }
 
     //회원정보조회 - index

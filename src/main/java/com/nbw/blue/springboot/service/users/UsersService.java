@@ -195,6 +195,18 @@ public class UsersService {
         return new UsersResponseDto("SUCCESS", entity);
     }
 
+    //email로 사용자 검색
+    public UsersResponseDto findByEmail(String email) {
+
+        if (usersRepository.findByEmail(email).isPresent()) {
+            Users entity = usersRepository.findByEmail(email).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. email=" + email));
+            return new UsersResponseDto("SUCCESS", entity);
+        } else {
+            Users entity = Users.builder().build();
+            return new UsersResponseDto("FAIL", entity);
+        }
+    }
+
     //id로 사용자 검색
     public UsersResponseDto findById(Long id) {
         Users entity = usersRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
