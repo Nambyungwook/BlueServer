@@ -44,7 +44,7 @@ public class SitesApiController {
         String input_all_gender = gender;
 
         if (allLocal.equals("1")) {
-            input_all_local = "전국";
+            input_all_local = "무관";
         }
 
         if (allIncome.equals("1")) {
