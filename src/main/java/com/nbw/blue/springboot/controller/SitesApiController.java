@@ -31,24 +31,42 @@ public class SitesApiController {
                                          @RequestParam(required = false) String local,
                                          @RequestParam(required = false) String allLocal,
                                          @RequestParam(required = false) String income,
+                                         @RequestParam(required = false) String allIncome,
                                          @RequestParam(required = false) String age,
+                                         @RequestParam(required = false) String allAge,
                                          @RequestParam(required = false) String gender,
+                                         @RequestParam(required = false) String allGender,
                                          @RequestParam(required = false) String siteName) {
 
+        String input_all_local = local;
+        String input_all_income = income;
+        String input_all_age = age;
+        String input_all_gender = gender;
+
         if (allLocal.equals("1")) {
-            List<Sites> searchedSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, income, age, gender, siteName);
-            List<Sites> allLocalSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, "전국", income, age, gender, siteName);
-
-            List<Sites> retSitesList = new ArrayList<>();
-            retSitesList.addAll(searchedSitesList);
-            retSitesList.addAll(allLocalSitesList);
-
-            return new SitesListResponseDto("SUCCESS", retSitesList);
-        } else {
-            List<Sites> searchedSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, income, age, gender, siteName);
-            return new SitesListResponseDto("SUCCESS", searchedSitesList);
+            input_all_local = "전국";
         }
 
+        if (allIncome.equals("1")) {
+            input_all_income = "무관";
+        }
+
+        if (allAge.equals("1")) {
+            input_all_age = "무관";
+        }
+
+        if (allGender.equals("1")) {
+            input_all_gender = "무관";
+        }
+
+        List<Sites> searchedSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, income, age, gender, siteName);
+        List<Sites> allCheckSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, input_all_local, input_all_income, input_all_age, input_all_gender, siteName);
+
+        List<Sites> retSitesList = new ArrayList<>();
+        retSitesList.addAll(searchedSitesList);
+        retSitesList.addAll(allCheckSitesList);
+
+        return new SitesListResponseDto("SUCCESS", retSitesList);
     }
 
     //사이트 추가
