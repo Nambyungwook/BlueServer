@@ -40,7 +40,7 @@ public class UsersService {
     @Transactional
     public UserSavedSitesResponseDto saveSites(UserSavedSitesSaveRequestDto requestDto) {
         Long savedSiteId = requestDto.toEntity().getSiteId();
-        if (userSavedSitesRepository.findAllByUidContainingAndId(requestDto.toEntity().getUid(), savedSiteId).isPresent()) {
+        if (userSavedSitesRepository.findAllByUidContainingAndSiteId(requestDto.toEntity().getUid(), savedSiteId).isPresent()) {
             return new UserSavedSitesResponseDto(requestDto.toEntity(), "FAIL");
         }
         return new UserSavedSitesResponseDto(userSavedSitesRepository.save(requestDto.toEntity()), "SUCCESS");
@@ -167,8 +167,15 @@ public class UsersService {
         Users users = usersRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
 
         SignStatus signStatus = signStatusRepository.findByUid(uid).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+        //사용자 데이터 삭제
         usersRepository.delete(users);
+        //사용자 로그인 상태 삭제
         signStatusRepository.delete(signStatus);
+        //사용자가 저장한 사이트 목록 전체 삭제
+        for (int i=0; i<userSavedSitesRepository.findAllByUid(uid).size(); i++) {
+            UserSavedSites dropUserSavedSite = userSavedSitesRepository.findAllByUid(uid).get(i);
+            userSavedSitesRepository.delete(dropUserSavedSite);
+        }
 
         CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "회원탈퇴 성공", uid);
         return responeseDto;

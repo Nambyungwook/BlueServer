@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface UserSavedSitesRepository extends JpaRepository<UserSavedSites, Long> {
     List<UserSavedSites> findByUid(String uid);
+    List<UserSavedSites> findAllByUid(String uid);
     Optional<UserSavedSites> findById(Long id);
-    Optional<UserSavedSites> findAllByUidContainingAndId(String uid, Long id);
+    Optional<UserSavedSites> findAllByUidContainingAndSiteId(String uid, Long siteId);
 }
