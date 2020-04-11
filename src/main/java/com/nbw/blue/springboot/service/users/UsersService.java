@@ -177,14 +177,19 @@ public class UsersService {
     //로그인 상태 조회
     @Transactional
     public SignStatusResponseDto getStatus(String uid) {
-        SignStatus signStatus = signStatusRepository.findByUid(uid).orElse(SignStatus.builder().uid(uid).sign_status(true).build());
 
-        if (signStatus.isSign_status()) {
-            SignStatusResponseDto signStatusResponseDto = new SignStatusResponseDto(uid, true);
-            return signStatusResponseDto;
+        if (usersRepository.findByUid(uid).isPresent()) {
+            SignStatus signStatus = signStatusRepository.findByUid(uid).orElse(SignStatus.builder().uid(uid).sign_status(true).build());
+
+            if (signStatus.isSign_status()) {
+                SignStatusResponseDto signStatusResponseDto = new SignStatusResponseDto(uid, true);
+                return signStatusResponseDto;
+            } else {
+                SignStatusResponseDto signStatusResponseDto = new SignStatusResponseDto(uid, false);
+                return signStatusResponseDto;
+            }
         } else {
-            SignStatusResponseDto signStatusResponseDto = new SignStatusResponseDto(uid, false);
-            return signStatusResponseDto;
+            return new SignStatusResponseDto(uid, false);
         }
     }
 
