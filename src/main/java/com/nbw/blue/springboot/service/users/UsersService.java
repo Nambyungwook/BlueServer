@@ -62,12 +62,12 @@ public class UsersService {
             cnt++;
 
             if (cnt==userSavedSitesList.size()) {
-                CommonResponeseDto responeseDto = new CommonResponeseDto("FAIL", "해당 사이트가 업습니다. siteId = ", siteId+"");
+                CommonResponeseDto responeseDto = new CommonResponeseDto("FAIL", "해당 사이트가 업습니다. siteId = "+siteId, siteId+"");
                 return responeseDto;
             }
         }
 
-        CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "저장한 사이트 제거 성공. siteId = ", siteId+"");
+        CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "저장한 사이트 제거 성공. siteId = "+siteId, siteId+"");
         return responeseDto;
     }
 
