@@ -172,9 +172,9 @@ public class UsersService {
         //사용자 로그인 상태 삭제
         signStatusRepository.delete(signStatus);
         //사용자가 저장한 사이트 목록 전체 삭제
-        for (int i=0; i<userSavedSitesRepository.findAllByUid(uid).size(); i++) {
-            UserSavedSites dropUserSavedSite = userSavedSitesRepository.findAllByUid(uid).get(i);
-            userSavedSitesRepository.delete(dropUserSavedSite);
+        List<UserSavedSites> userSavedSitesList = userSavedSitesRepository.findAllByUid(uid);
+        for (int i=0; i<userSavedSitesList.size(); i++) {
+            userSavedSitesRepository.delete(userSavedSitesList.get(i));
         }
 
         CommonResponeseDto responeseDto = new CommonResponeseDto("SUCCESS", "회원탈퇴 성공", uid);
