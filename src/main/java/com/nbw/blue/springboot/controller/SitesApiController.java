@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.TreeSet;
 
 @RequiredArgsConstructor
 @RestController
@@ -63,8 +61,13 @@ public class SitesApiController {
         List<Sites> allCheckSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, input_all_local, input_all_income, input_all_age, input_all_gender, siteName);
 
         List<Sites> retSitesList = new ArrayList<>();
-        retSitesList.addAll(searchedSitesList);
         retSitesList.addAll(allCheckSitesList);
+
+        //중복 제거 로직
+        for(Sites site : searchedSitesList){
+            if(!retSitesList.contains(site))
+                retSitesList.add(site);
+        }
 
         return new SitesListResponseDto("SUCCESS", retSitesList);
     }

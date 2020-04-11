@@ -8,7 +8,6 @@ import com.nbw.blue.springboot.controller.dto.request.UsersUpdateRequestDto;
 import com.nbw.blue.springboot.domain.sites.Sites;
 import com.nbw.blue.springboot.domain.sites.SitesRepository;
 import com.nbw.blue.springboot.domain.sites.UserSavedSitesRepository;
-import com.nbw.blue.springboot.domain.users.UsersRepository;
 import com.nbw.blue.springboot.service.users.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
