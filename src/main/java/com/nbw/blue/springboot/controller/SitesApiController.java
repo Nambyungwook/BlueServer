@@ -2,6 +2,7 @@ package com.nbw.blue.springboot.controller;
 
 import com.nbw.blue.springboot.controller.dto.request.SitesSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.SitesUpdateRequestDto;
+import com.nbw.blue.springboot.controller.dto.response.CommonResponeseDto;
 import com.nbw.blue.springboot.controller.dto.response.SitesListResponseDto;
 import com.nbw.blue.springboot.controller.dto.response.SitesResponseDto;
 import com.nbw.blue.springboot.domain.sites.Sites;
@@ -10,6 +11,10 @@ import com.nbw.blue.springboot.service.sites.SitesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +24,38 @@ public class SitesApiController {
 
     private final SitesService sitesService;
     private final SitesRepository sitesRepository;
+
+    private String retNotice;
+
+    //공지사항 보여주기
+    @GetMapping("/blue/v1/sites/notice")
+    public CommonResponeseDto showNoitice() {
+
+        String notice = "";
+
+        BufferedReader bReader = null;
+
+        try {
+            File file = new File("test.txt");
+            bReader = new BufferedReader(new FileReader(file));
+
+            // 더이상 읽어들일게 없을 때까지 읽어들이게 합니다.
+            while((notice = bReader.readLine()) != null) {
+                System.out.println(notice);
+                retNotice = notice;
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(bReader != null) bReader.close();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return new CommonResponeseDto("SUCCESS", retNotice, "NOTICE");
+    }
 
     //전체 목록 조회 - 후에 사이트 데이터가 방대해 지면 불러올때 나눠서 불러오도록 수정해야 한다. 그것을 위해 page, size 변수를 만들었다.
     @GetMapping("/blue/v1/sites/")

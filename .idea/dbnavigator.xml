@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
-        <schema name="blue_app_server" object-types="procedure, function, table, view" />
+        <schema name="blue_app_server" object-types="constraint, index, procedure, function, dataset trigger, table, view, column" />
       </connection>
     </loaded-nodes>
   </component>
@@ -123,7 +123,9 @@ select * from sign_status;
 #delete from sign_status where id = 6;
 select  * from user_saved_sites;
 #drop table user_saved_sites;
-#delete from user_saved_sites;]]></console>
+#delete from user_saved_sites;
+
+alter table sites MODIFY site_detail varchar(1000);]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

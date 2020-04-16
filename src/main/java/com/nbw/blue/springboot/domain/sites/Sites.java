@@ -41,7 +41,7 @@ public class Sites extends BaseTimeEntity {
     @Column(name = "siteUrl", nullable = false)
     private String siteUrl;
 
-    @Column(name = "siteDetail", nullable = false)
+    @Column(name = "siteDetail", length = 1000, nullable = false)
     private String siteDetail;
 
     @Builder
