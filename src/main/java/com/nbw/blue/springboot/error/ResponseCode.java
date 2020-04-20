@@ -25,6 +25,8 @@ public enum ResponseCode {
 
     ALREADY_EXIST_PHONE_NUMBER(HttpStatus.BAD_REQUEST, "이미 가입된 전화번호입니다."),
 
+    NO_DATA(HttpStatus.BAD_REQUEST, "데이터가 없습니다."),
+
     // 비밀번호 리셋
     NOT_MATCH_MAIL(HttpStatus.BAD_REQUEST, "가입하신 이메일과 일치하지 않습니다.");
 
