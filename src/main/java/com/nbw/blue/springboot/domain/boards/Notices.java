@@ -1,5 +1,6 @@
 package com.nbw.blue.springboot.domain.boards;
 
+import com.nbw.blue.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "notice")
-public class Notices {
+public class Notices extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
