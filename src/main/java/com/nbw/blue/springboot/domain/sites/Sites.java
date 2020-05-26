@@ -29,7 +29,7 @@ public class Sites extends BaseTimeEntity implements Comparable<Sites>{
     @Column(name = "local", columnDefinition = "varchar(30)", nullable = false)
     private String local;
 
-    @Column(name = "subLocal", columnDefinition = "varchar(30)")
+    @Column(name = "subLocal", columnDefinition = "varchar(30)", nullable = false)
     private String subLocal;
 
     @Column(name = "income", columnDefinition = "varchar(30)", nullable = false)

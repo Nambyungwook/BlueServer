@@ -23,7 +23,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
+        <schema name="blue_app_server" object-types="procedure, dataset trigger, index, table, view, function, column, constraint" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="c1399ef2-692b-40b9-9a34-3b19816fa21f">
@@ -76,6 +80,7 @@ create table sites (
     site_detail varchar(255) not null, 
     site_name varchar(30) not null, 
     site_url varchar(255) not null, 
+    sub_local varchar(30) not null,
     target_detail varchar(30) not null, 
     target_main varchar(30) not null, 
     primary key (id)
@@ -127,9 +132,13 @@ select * from users;
 select * from sign_status;
 #delete from sign_status where id = 6;
 select  * from user_saved_sites;
+
+select * from sites;
+drop table sites;
+
 #drop table user_saved_sites;
 #delete from user_saved_sites;
-drop table notice;
+#drop table notice;
 
 alter table sites MODIFY site_detail varchar(1000);]]></console>
     </connection>
