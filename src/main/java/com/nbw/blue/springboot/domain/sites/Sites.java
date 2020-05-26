@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "sites")
-public class Sites extends BaseTimeEntity {
+public class Sites extends BaseTimeEntity implements Comparable<Sites>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +28,9 @@ public class Sites extends BaseTimeEntity {
 
     @Column(name = "local", columnDefinition = "varchar(30)", nullable = false)
     private String local;
+
+    @Column(name = "subLocal", columnDefinition = "varchar(30)")
+    private String subLocal;
 
     @Column(name = "income", columnDefinition = "varchar(30)", nullable = false)
     private String income;
@@ -49,6 +52,7 @@ public class Sites extends BaseTimeEntity {
                  String targetMain,
                  String targetDetail,
                  String local,
+                 String subLocal,
                  String income,
                  String age,
                  String gender,
@@ -59,6 +63,7 @@ public class Sites extends BaseTimeEntity {
         this.targetMain = targetMain;
         this.targetDetail = targetDetail;
         this.local = local;
+        this.subLocal = subLocal;
         this.income = income;
         this.age = age;
         this.gender = gender;
@@ -70,6 +75,7 @@ public class Sites extends BaseTimeEntity {
                        String targetMain,
                        String targetDetail,
                        String local,
+                       String subLocal,
                        String income,
                        String age,
                        String gender,
@@ -80,10 +86,18 @@ public class Sites extends BaseTimeEntity {
         this.targetMain = targetMain;
         this.targetDetail = targetDetail;
         this.local = local;
+        this.subLocal = subLocal;
         this.income = income;
         this.age = age;
         this.gender = gender;
         this.siteUrl = siteUrl;
         this.siteDetail = siteDetail;
+    }
+
+    @Override
+    public int compareTo(Sites o) {
+        String sitesName = o.getSiteName();
+
+        return -sitesName.compareToIgnoreCase(getSiteName());
     }
 }

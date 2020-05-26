@@ -27,6 +27,7 @@ public class SitesService {
                 requestDto.getTargetMain(),
                 requestDto.getTargetDetail(),
                 requestDto.getLocal(),
+                requestDto.getSubLocal(),
                 requestDto.getIncome(),
                 requestDto.getAge(),
                 requestDto.getGender(),

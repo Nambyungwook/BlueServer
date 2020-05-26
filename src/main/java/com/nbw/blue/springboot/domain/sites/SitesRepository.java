@@ -17,11 +17,12 @@ public interface SitesRepository extends JpaRepository<Sites, Long> {
     List<Sites> findByGender(String gender);
     List<Sites> findBySiteName(String siteName);
 
-    List<Sites> findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(String targetMain,
-                                                                                                                                                   String targetDetail,
-                                                                                                                                                   String local,
-                                                                                                                                                   String income,
-                                                                                                                                                   String age,
-                                                                                                                                                   String gender,
-                                                                                                                                                   String siteName);
+    List<Sites> findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndSubLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(String targetMain,
+                                                                                                                                                                                                  String targetDetail,
+                                                                                                                                                                                                  String local,
+                                                                                                                                                                                                  String subLocal,
+                                                                                                                                                                                                  String income,
+                                                                                                                                                                                                  String age,
+                                                                                                                                                                                                  String gender,
+                                                                                                                                                                                                  String siteName);
 }

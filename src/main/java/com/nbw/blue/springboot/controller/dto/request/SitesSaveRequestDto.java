@@ -13,6 +13,7 @@ public class SitesSaveRequestDto {
     private String targetMain;
     private String targetDetail;
     private String local;
+    private String subLocal;
     private String income;
     private String age;
     private String gender;
@@ -24,6 +25,7 @@ public class SitesSaveRequestDto {
                                String targetMain,
                                String targetDetail,
                                String local,
+                               String subLocal,
                                String income,
                                String age,
                                String gender,
@@ -33,6 +35,7 @@ public class SitesSaveRequestDto {
         this.targetMain = targetMain;
         this.targetDetail = targetDetail;
         this.local = local;
+        this.subLocal = subLocal;
         this.income = income;
         this.age = age;
         this.gender = gender;
@@ -46,6 +49,7 @@ public class SitesSaveRequestDto {
                 .targetMain(targetMain)
                 .targetDetail(targetDetail)
                 .local(local)
+                .subLocal(subLocal)
                 .income(income)
                 .age(age)
                 .gender(gender)

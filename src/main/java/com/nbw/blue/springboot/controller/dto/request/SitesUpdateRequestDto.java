@@ -13,6 +13,7 @@ public class SitesUpdateRequestDto {
     private String targetMain;
     private String targetDetail;
     private String local;
+    private String subLocal;
     private String income;
     private String age;
     private String gender;
@@ -25,6 +26,7 @@ public class SitesUpdateRequestDto {
                                  String targetMain,
                                  String targetDetail,
                                  String local,
+                                 String subLocal,
                                  String income,
                                  String age,
                                  String gender,
@@ -35,6 +37,7 @@ public class SitesUpdateRequestDto {
         this.targetMain = targetMain;
         this.targetDetail = targetDetail;
         this.local = local;
+        this.subLocal = subLocal;
         this.income = income;
         this.age = age;
         this.gender = gender;

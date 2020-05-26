@@ -2,7 +2,6 @@ package com.nbw.blue.springboot.controller;
 
 import com.nbw.blue.springboot.controller.dto.request.SitesSaveRequestDto;
 import com.nbw.blue.springboot.controller.dto.request.SitesUpdateRequestDto;
-import com.nbw.blue.springboot.controller.dto.response.CommonResponeseDto;
 import com.nbw.blue.springboot.controller.dto.response.SitesListResponseDto;
 import com.nbw.blue.springboot.controller.dto.response.SitesResponseDto;
 import com.nbw.blue.springboot.domain.sites.Sites;
@@ -28,6 +27,7 @@ public class SitesApiController {
                                          @RequestParam(required = false) String targetMain,
                                          @RequestParam(required = false) String targetDetail,
                                          @RequestParam(required = false) String local,
+                                         @RequestParam(required = false) String subLocal,
                                          @RequestParam(required = false) String allLocal,
                                          @RequestParam(required = false) String income,
                                          @RequestParam(required = false) String allIncome,
@@ -58,8 +58,8 @@ public class SitesApiController {
             input_all_gender = "무관";
         }
 
-        List<Sites> searchedSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, income, age, gender, siteName);
-        List<Sites> allCheckSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, input_all_local, input_all_income, input_all_age, input_all_gender, siteName);
+        List<Sites> searchedSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndSubLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, subLocal, income, age, gender, siteName);
+        List<Sites> allCheckSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndSubLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, input_all_local, subLocal, input_all_income, input_all_age, input_all_gender, siteName);
 
         List<Sites> retSitesList = new ArrayList<>();
         retSitesList.addAll(allCheckSitesList);
@@ -69,6 +69,8 @@ public class SitesApiController {
             if(!retSitesList.contains(site))
                 retSitesList.add(site);
         }
+        //사이트 이름 순서로 정렬(큰순서)
+        retSitesList.sort(Sites::compareTo);
 
         return new SitesListResponseDto("SUCCESS", retSitesList);
     }

@@ -12,6 +12,7 @@ public class SitesResponseDto {
     private String targetMain;
     private String targetDetail;
     private String local;
+    private String subLocal;
     private String income;
     private String age;
     private String gender;
@@ -25,6 +26,7 @@ public class SitesResponseDto {
         this.targetMain = entity.getTargetMain();
         this.targetDetail = entity.getTargetDetail();
         this.local = entity.getLocal();
+        this.subLocal = entity.getSubLocal();
         this.income = entity.getIncome();
         this.age = entity.getAge();
         this.gender = entity.getGender();
