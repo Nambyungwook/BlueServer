@@ -38,12 +38,14 @@ public class SitesApiController {
                                          @RequestParam(required = false) String siteName) {
 
         String input_all_local = local;
+        String input_all_sub_local = subLocal;
         String input_all_income = income;
         String input_all_age = age;
         String input_all_gender = gender;
 
         if (allLocal.equals("1")) {
             input_all_local = "무관";
+            input_all_sub_local = "무관";
         }
 
         if (allIncome.equals("1")) {
@@ -59,7 +61,7 @@ public class SitesApiController {
         }
 
         List<Sites> searchedSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndSubLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, local, subLocal, income, age, gender, siteName);
-        List<Sites> allCheckSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndSubLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, input_all_local, subLocal, input_all_income, input_all_age, input_all_gender, siteName);
+        List<Sites> allCheckSitesList = sitesRepository.findAllByTargetMainContainingAndTargetDetailContainingAndLocalContainingAndSubLocalContainingAndIncomeContainingAndAgeContainingAndGenderContainingAndSiteNameContainingOrderById(targetMain, targetDetail, input_all_local, input_all_sub_local, input_all_income, input_all_age, input_all_gender, siteName);
 
         List<Sites> retSitesList = new ArrayList<>();
         retSitesList.addAll(allCheckSitesList);
